@@ -15,4 +15,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [MapController::class, 'index']);
+Route::get('/modal', [MapController::class, 'modal']);
 Route::post('/save-coordinates', [MapController::class, 'getCoordonnees']);

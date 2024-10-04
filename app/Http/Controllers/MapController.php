@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 class MapController extends Controller
 {
+    public function modal(){
+        return view('modal');
+    }
+
     public function index()
     {
         return view('welcome');
