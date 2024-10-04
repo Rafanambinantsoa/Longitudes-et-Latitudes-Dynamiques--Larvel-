@@ -14,14 +14,14 @@
       #map {
         height: 300px;
         width: 100%;
-        border: 1px solid red; 
+        border: 1px solid red;
       }
     </style>
 
-    <title>Modal with Map and Form</title>
+    <title>Modal with Map and Kim</title>
   </head>
   <body>
-    <h1>Hello, world!</h1>
+    <h1>Hello, Antsa Bosse!</h1>
 
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
@@ -54,8 +54,12 @@
                     <input type="password" class="form-control" id="exampleInputPassword1">
                   </div>
                   <div class="mb-3">
-                    <label for="markerCoords" class="form-label">Marker Coordinates</label>
-                    <input type="text" class="form-control" id="markerCoords" readonly>
+                    <label for="latitude" class="form-label">Latitude</label>
+                    <input type="text" class="form-control" id="latitude" readonly>
+                  </div>
+                  <div class="mb-3">
+                    <label for="longitude" class="form-label">Longitude</label>
+                    <input type="text" class="form-control" id="longitude" readonly>
                   </div>
                   <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
@@ -79,18 +83,22 @@
       // Initialize map when modal is shown
       document.getElementById('staticBackdrop').addEventListener('shown.bs.modal', function () {
         if (!map) {
-          map = L.map('map').setView([51.505, -0.09], 13);
+          // Center the map on Madagascar
+          map = L.map('map').setView([-18.8792, 47.5079], 6); // Zoom level set to 6 for better view
 
           L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap contributors'
           }).addTo(map);
 
-          marker = L.marker([51.505, -0.09], {draggable: true}).addTo(map);
+          // Place the draggable marker at a point in Madagascar
+          marker = L.marker([-18.8792, 47.5079], {draggable: true}).addTo(map);
 
           marker.on('moveend', function () {
             var lat = marker.getLatLng().lat;
             var lng = marker.getLatLng().lng;
-            document.getElementById('markerCoords').value = lat + ', ' + lng;
+            // Update the separate fields for latitude and longitude
+            document.getElementById('latitude').value = lat;
+            document.getElementById('longitude').value = lng;
           });
         } else {
           // Delay to ensure modal is fully rendered
